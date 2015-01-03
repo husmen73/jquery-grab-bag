@@ -13,6 +13,7 @@
             var self         = this;
             var $self        = $(self);
             var minHeight    = $self.height();
+            var maxHeight = parseInt($self.attr("data-maxHeight"));
             var noFlickerPad = $self.hasClass('autogrow-short') ? 0 : parseInt($self.css('lineHeight')) || 0;
             var settings = $.extend({
                 preGrowCallback: null,
@@ -60,7 +61,8 @@
                   newHeight=settings.preGrowCallback($self,shadow,newHeight,minHeight);
                 }
                 
-                $self.height(newHeight);
+                if(maxHeight > 0 && maxHeight >= newHeight)
+                	$self.height(newHeight);
                 
                 if(settings.postGrowCallback!=null){
                   settings.postGrowCallback($self);
